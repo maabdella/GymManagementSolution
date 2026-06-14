@@ -24,4 +24,14 @@ public class PlansController : Controller
 
     // Details Action >> show details of 1 plan
     // Get baseurl/plans/details/10....
-}
+
+    public async Task<IActionResult> Details(int id) 
+    {
+        var plan = await dbContext.Plans.FindAsync(id);
+        if (plan is null)
+            return RedirectToAction(nameof(Index));
+        else
+            return View(plan);
+        
+    }
+}   
